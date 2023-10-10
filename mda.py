@@ -10,6 +10,9 @@ def maximum_dissimilarity_subset(X, n_subset, l_norm=2):
     # Example
     # X = np.random.rand(100,2)
     # S = maximum_dissimilarity_subset(X, 10)
+
+    # Length of data
+    N = len(X)
     
     # First find instance (vector) with greatest dissimilarity, d
     # Preallocate d, with columns are vectors, rows are difference with each vector
