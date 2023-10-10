@@ -53,11 +53,33 @@ def maximum_dissimilarity_subset(X, n_subset, l_norm=2):
         
     return S
 
-# 2-dimensional test
-X = np.random.rand(100,2)
-S = maximum_dissimilarity_subset(X, 10)
+# ------ Example -------
+
+# Normally distributed data
+X = np.random.randn(1000,2)
+
+# Random Subset
+I = np.round(np.random.uniform(0,len(X),15)).astype(int)
+S_random = X[I,:]
+
+# MDA subset
+S_mda = maximum_dissimilarity_subset(X, 15)
 
 # Plot
-plt.scatter(X[:,0],X[:,1], label='data')
-plt.scatter(S[:,0],S[:,1], label='subset')
-plt.legend()
+fig, axs = plt.subplots(1, 2, figsize=(9,4.5), sharey=True, tight_layout=True)
+
+plt.sca(axs[0])
+plt.scatter(X[:,0],X[:,1], 15, 'gray', label='data', alpha=0.3)
+plt.scatter(S_random[:,0], S_random[:,1], 30, 'r', label='subset')
+plt.ylabel('Data Dimension 2')
+plt.xlabel('Data Dimension 1')
+plt.title('Uniform Random Sampling', fontweight="bold")
+
+plt.sca(axs[1])
+plt.scatter(X[:,0],X[:,1], 15, 'gray', label='data', alpha=0.3)
+plt.scatter(S_mda[:,0], S_mda[:,1], 30, 'r', label='subset')
+plt.legend(bbox_to_anchor=(1.025, 1.0), loc='upper left')
+plt.xlabel('Data Dimension 1')
+plt.title('Maximum Dissimilarity Sampling', fontweight="bold")
+
+plt.show()
